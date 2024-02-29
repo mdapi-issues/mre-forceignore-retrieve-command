@@ -7,6 +7,8 @@
 > [!IMPORTANT]
 > A green status badge means the issue was successfully reproduced.
 
+https://github.com/mdapi-issues/mre-forceignore-retrieve-command/assets/789765/55d2f585-3ee3-4a88-ae58-c9f8599c75cc
+
 Given the following `.forceignore` file
 
 ```text
