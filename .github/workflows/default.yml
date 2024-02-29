@@ -1,0 +1,33 @@
+name: Reproduce Issue
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+  schedule:
+    - cron: "0 4 * * 5" # every Friday 04:00
+
+jobs:
+  default:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .node-version
+      - name: Install dependencies
+        run: |
+          npm install --global @salesforce/cli
+          sf --version
+      - name: Authenticate an org
+        env:
+          SFDX_AUTH_URL: ${{ secrets.SFDX_AUTH_URL_DEVHUB }}
+        run: |
+          echo "${SFDX_AUTH_URL}" | sf org login sfdx-url --set-default --sfdx-url-stdin
+      - name: Reproduce issue
+        run: |
+          ./reproduce-issue.sh
