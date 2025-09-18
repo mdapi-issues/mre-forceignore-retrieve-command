@@ -21,7 +21,7 @@ jobs:
           node-version-file: .node-version
       - name: Install dependencies
         run: |
-          npm install --global @salesforce/cli
+          npm install --ignore-scripts --global @salesforce/cli
           sf --version
       - name: Authenticate an org
         env:
